@@ -16,7 +16,7 @@ What is OOP (Object Oriented Programming)?
 - General introduction
 
 Tenets of OOP
-- Polymorphism (designing objects to share behaviors and to be able to override shared behaviors with specific ones. Polymorphism takes advantage of inheritance in order to make this happen.)
+- Polymorphism (designing objects to share behaviours and to be able to override shared behaviours with specific ones. Polymorphism takes advantage of inheritance in order to make this happen.)
 - Super and sub classes
 
 - modularity
@@ -72,7 +72,7 @@ console.log('secondPerson is ' + secondPerson.firstName);
 Dus:
 
 - Object Oriented Programming in Javascript (ES5 & ES6)
-- Commenly used design patterns in Javascript
+- Commonly used design patterns in Javascript
 - Modular javascript (with Require.js)
 
 var dom = {
@@ -99,7 +99,7 @@ var dom = (function (jq) {
 		return "customId" + _counter++;
 	}
 
-	function create(tageName, id) {
+	function create(tagName, id) {
 		var el = document.createElement(tagName);
 
 		if (id) {
