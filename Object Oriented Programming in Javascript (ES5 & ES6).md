@@ -1,1 +1,1 @@
-# Object Oriented Programming in Javascript (ES5 & ES6)
+## Object Oriented Programming in Javascript (ES5 & ES6)

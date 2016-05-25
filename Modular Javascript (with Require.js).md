@@ -1,1 +1,1 @@
-# Modular Javascript (with Require.js)
+## Modular Javascript (with Require.js)

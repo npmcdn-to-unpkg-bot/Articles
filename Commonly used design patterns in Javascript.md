@@ -1,1 +1,1 @@
-# Commonly used design patterns in Javascript
+## Commonly used design patterns in Javascript
