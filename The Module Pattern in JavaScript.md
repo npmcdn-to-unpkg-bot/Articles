@@ -243,15 +243,15 @@ In the same way as before you attach the 'RevealingModulePattern' module to the 
 
 Is able to be placed outside of the return statement and is referenced indirectly. It is naming convention to name both the references the same but it can be a bit confusing at first.
 	
-	```javascript
- 	// Public vars and functions
- 	return {
- 	    foo : greetSomeone
- 	};
+```javascript
+// Public vars and functions
+return {
+    foo : greetSomeone
+};
 
-	'App.RevealingModulePattern.foo("World");' // returns 'Hello World!'
-	'App.RevealingModulePattern.greetSomeone("World");' returns 'undefined'
-	```
+'App.RevealingModulePattern.foo("World");' // returns 'Hello World!'
+'App.RevealingModulePattern.greetSomeone("World");' returns 'undefined'
+```
 
 ### Advantages
 
