@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Example to show the difference between the module pattern and the revealing module pattern.</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="author" href="humans.txt">
+    </head>
+    <body>
+        Example to show the difference between the module pattern and the revealing module pattern.
+
+        <script>
+            // Define the global namespace
+            var App = App || {};
+
+            // The module pattern
+            App.ModulePattern = (function(){
+              
+                // Private vars and functions
+                var _greeting = "Hello";
+                var _getGreeting = function(){
+                    return _greeting;
+                };
+
+                // Public vars and functions
+                return {
+                    greetSomeone: function(name){
+                      console.log(_getGreeting() + ", " + name + "!");
+                    }
+                };
+            })();
+
+            App.ModulePattern.greetSomeone("World");
+
+
+            // The revealing module pattern
+            App.RevealingModulePattern = (function() {
+                
+                // Private vars and functions
+                var _greeting = "Hello";
+                var _getGreeting = function(){
+                    return _greeting;
+                };
+
+                var greetSomeone = function(name){
+                    console.log(_getGreeting() + ", " + name + "!");
+                };
+
+                // Public vars and functions
+                return {
+                    greetSomeone : greetSomeone
+                };
+            })();
+
+            App.RevealingModulePattern.greetSomeone("World");
+        </script>
+    </body>
+</html>
