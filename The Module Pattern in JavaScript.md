@@ -1,4 +1,4 @@
-Design Patterns
+## Design Patterns
 
 Design patterns are reusable solutions to commonly occuring problems in software design. They help us structure our code in an optimized way whilst meeting the needs of problems we are attempting to solve. Other programmers can easily read and maintain code writting using commonly used design patterns. They provide us a common vocabulary to describe solutions opposed to describing syntax and semantics.
 
@@ -9,7 +9,7 @@ Patterns are not exact solutions to your problem; you still have to write your c
 Now that we have gotton this general introduction out of the way I would like to introduce a commonly used JavaScript design pattern: the Module Pattern. 
 
 
-The Module Pattern
+## The Module Pattern
 
 The Module Pattern was popularized by Eric Miraglia in a blogpost back in 2007. He introduces us to the work of Douglas Crockford. The Module Pattern focusses on a couple of key principles in OOP (Object Oriented Programming). the Module Pattern is used to mimic classes in conventional software engineering and focuses on encapsulation of methods and variables. The pattern strives to improve the reduction of globally scoped variables.  
 
@@ -18,12 +18,12 @@ It enables programmers to write private methods and variables in anonymous funct
 The Module Pattern relies on a couple of really sweet features in JavaScript. To understand it I will go back to the basics and gradually build it up. If you are already comfortable with specific topics feel free to skip the chapter. In the end I will expand further on the Module Pattern and modular JavaScript.
 
 
-Classes in JavaScript
+## Classes in JavaScript
 
-JavaScript is a class-less language, however classes can be simulated using functions. If you would like to learn more about OOP (Objective Oriented Programming) in JavaScript please read my article here.
+JavaScript is a class-less language, however classes can be simulated using functions. If you would like to learn more about OOP (Objective Oriented Programming) in JavaScript please read my [article](https://github.com/TimvanScherpenzeel/Articles/) on it here.
 
 
-Scope in JavaScript
+## Scope in JavaScript
 
 A scope is the lifespan of a variable. Like humans every variable is born, lives and dies. The beginning of a scope marks the time the variable is born and the end of the scope marks the time it dies. In other words: A scope is the current context of execution. In this context variables and expressions are 'visible'. If a variable is not in the current scope then it is unavaible to use and will return as undefined.
 
@@ -64,7 +64,7 @@ Note that this only works in one direction on the scope chain. A variable define
 Nested functions have access to variables declared in their outer scope. In other words: the scope of an inner function contains the scope of a parent function. The functions defined within another function won't be accessible outside the function unless they have been attached to an object that is accessible outside the function. This relationship between inner function and outer function we call static/lexical scoping. The scope of variables is defined by their position in source code. 
 
 
-Closures in JavaScript
+## Closures in JavaScript
 
 A closure is a subset of the lexical scope. Accessing a variable outside of the immediate scope creates a closure. 
 
@@ -87,7 +87,7 @@ A closure is a special kind of object that combines two things: a function, and 
 'parentFunction' returns its internal function 'childFunction'. Even though 'parentFunction' has finished executing at this point, the local scope where _privateVar has the value 'private' still exists and the childFunction still uses it.
 
 
-Anonymous self-executing functions
+## Anonymous self-executing functions
 
 An anonymous self-executing function is an immediately invoked function expression (IIFE). Many words to say that something look like this:
 
@@ -100,7 +100,7 @@ Take note of the parentheses around the entire function and the extra (); at the
 Those two parentheses enable everything contained to be executed immediately. Because of lexical scoping all variables and functions defined within the anonymous function aren’t available to the code outside of it, effectively using a closure to seal itself from other libraries and code. An IIFE can have a return value just like any other function. This means that we can choose what we would like to expose to the public. 
 
 
-Global import
+## Global import
 
 JavaScript has a feature known as implied globals. Whenever a name is used, the interpreter walks the scope chain backwards looking for a var statement for that name. If none is found, that variable is assumed to be global. 
 
@@ -113,7 +113,7 @@ Anonymous functions provide an easy alternative. By passing globals as parameter
 A major advantage of this solution is that we can write code that is truely modular. Even though jQuery exists in the global namespace we can make sure that it is only applied where we find it necessary.
 
 
-Global export
+## Global export
 
 You can declare your name in the global namespace by simple naming your anonymous function. 'return Module' returns the object 'var Module = {};'. To this empty object methods and variables are added to be exposed publicly. An example of this is 'Module.publicMethod'. This function is able to call the private function and return the result. Everything else is still protected using the closure of the anonymous function. Please also note the underscores in front of '_privateVar' and '_privateMethod'. It is a naming convention that private variables and functions are proceeded by an underscore. Normally variables & functions start with a lowercase letter but with modules, that is not the case. The general tradition is to start them with a capital letter instead.
 	
@@ -137,7 +137,7 @@ You can declare your name in the global namespace by simple naming your anonymou
 	})();
 
 
-Object literals
+## Object literals
 
 In object literal notation, an object is described as a set of comma-separated name/value pairs enclosed in curly braces 'var ... = { ... };'. Names inside the object may be either strings or identifiers that are followed by a colon. Object literals encapsulate data to minimize the use of global variables. Property values can be of any data type, including array literals, functions, and nested object literals.
 
@@ -156,7 +156,7 @@ In object literal notation, an object is described as a set of comma-separated n
 	};
 
 
-the Module Pattern continued
+## The Module Pattern continued
 
 Now that we've acquired the basic knowledge I will expand further on the Module Pattern and it's brother: the Revealing Module Pattern.
 
@@ -192,19 +192,21 @@ the Module Pattern has the following structure:
 You attach the 'ModulePattern' module to the global name 'App' to expose the return values to the public. Anything outside of the return statement is by default private. You access the module from the outside using 'App.ModulePattern.greetSomeone("World");'. The public function 'greetSomeone' has access to the private function '_getGreeting'. You are not able to access '_getGreeting' directly from the outside.
 
 
-Advantages
+### Advantages
+
 	- the Module Pattern fully supports encapsulation.
 	- Clean approach for developers
 	- Less clutter in the global namespace
 	- Localization of functions and variables through closures
 
-Disadvantages
+### Disadvantages
+
 	- Private methods are unaccessible and lose extendability.
 	- Public and private members are treated differently and are bound to their place in the source code.
 	- Some users experience issues with unit testing though given the adaptation of the Module Pattern by jQuery and their everyday use of QUnit to automate testing. 
 
 
-The Revealing Module Pattern
+## The Revealing Module Pattern
 
 The Revealing Module Pattern has the following structure:
 
@@ -250,7 +252,7 @@ Is able to be placed outside of the return statement and is referenced indirectl
 	'App.RevealingModulePattern.greetSomeone("World");' returns 'undefined'
 
 
-Advantages
+### Advantages
 
     - Cleaner approach for developers
     - Supports private data
@@ -260,22 +262,22 @@ Advantages
     - Explicitly defined public methods and variables which lead to increased readability
 
 
-Disadvantages
+### Disadvantages
 
 	- Private methods are unaccessible and lose extendability.
 	- It's harder to patch public methods and variables that are referred to by something private.
 	- Some users experience issues with unit testing though given the adaptation of the Module Pattern by jQuery and their everyday use of QUnit to automate testing.
 
 
-Conclusion
+## Conclusion
 
 I hope you all enjoyed my introduction to design patterns, the Module Pattern and the Revealing Module Pattern. My goal was to give a general overview and build up knowledge step by step to understand the patterns myself and help you along the way. 
 
-I would like to thank Addy Osmani for writing the great book ('Learning JavaScript Design Patterns')[https://addyosmani.com/resources/essentialjsdesignpatterns/book/index.html] which I highly recommend reading.
+I would like to thank Addy Osmani for writing the great book ['Learning JavaScript Design Patterns'](https://addyosmani.com/resources/essentialjsdesignpatterns/book/index.html) which I highly recommend reading.
 
-Another great article to read is ('Javascript Module In Depth')[http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html] by Ben Cherry especially the parts on global imports and exports.
+Another great article to read is ['Javascript Module In Depth'](http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html) by Ben Cherry especially the parts on global imports and exports.
 
-Final thanks goes out to Carl Danley and his two articles ('The Module Pattern')[https://carldanley.com/js-module-pattern/] and ('The Revealing Module Pattern')[https://carldanley.com/js-revealing-module-pattern/]. He gives a great overview of the two patterns and provides a learning source for many more. 
+Final thanks goes out to Carl Danley and his two articles ['The Module Pattern'](https://carldanley.com/js-module-pattern/) and ['The Revealing Module Pattern'](https://carldanley.com/js-revealing-module-pattern/). He gives a great overview of the two patterns and provides a learning source for many more. 
 
 
 
