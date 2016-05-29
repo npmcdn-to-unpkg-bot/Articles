@@ -31,35 +31,39 @@ Global variables are alive as soon as the program starts and die when the progra
 
 In JavaScript a variable or method defined inside of a function is not accessable from outside of that function. Local variables are only 'alive' as long as the function is being executed. Variables inside of the global scope are called 'public', local variables 'private'.
 
-	var globalVar = 'global'; // global variable
+```javascript
+var globalVar = 'global'; // global variable
 
-	var parent = function () {
+var parent = function () {
+	var _privateVar = 'private';
+
+	console.log(globalVar); // globalVar is defined
+	console.log(_privateVar); // privateVar is defined
+
+	var child = function () {
+		console.log(globalVar); // globalVar is defined
+		console.log(_privateVar); // privateVar is defined
+	};
+};
+```
+
+Note that this only works in one direction on the scope chain. A variable defined on the child level is not available to the parent level.
+
+```javascript
+var globalVar = 'global'; // global variable
+
+var parent = function () {
+	console.log(globalVar); // globalVar is defined
+	console.log(_privateVar); // privateVar is undefined
+
+	var child = function () {
 		var _privateVar = 'private';
 
 		console.log(globalVar); // globalVar is defined
 		console.log(_privateVar); // privateVar is defined
-
-		var child = function () {
-			console.log(globalVar); // globalVar is defined
-			console.log(_privateVar); // privateVar is defined
-		};
 	};
-
-Note that this only works in one direction on the scope chain. A variable defined on the child level is not available to the parent level.
-
-	var globalVar = 'global'; // global variable
-
-	var parent = function () {
-		console.log(globalVar); // globalVar is defined
-		console.log(_privateVar); // privateVar is undefined
-
-		var child = function () {
-			var _privateVar = 'private';
-
-			console.log(globalVar); // globalVar is defined
-			console.log(_privateVar); // privateVar is defined
-		};
-	};
+};
+```
 
 Nested functions have access to variables declared in their outer scope. In other words: the scope of an inner function contains the scope of a parent function. The functions defined within another function won't be accessible outside the function unless they have been attached to an object that is accessible outside the function. This relationship between inner function and outer function we call static/lexical scoping. The scope of variables is defined by their position in source code. 
 
@@ -70,18 +74,20 @@ A closure is a subset of the lexical scope. Accessing a variable outside of the 
 
 A closure is a special kind of object that combines two things: a function, and the environment in which that function was created. The environment consists of any local variables that were in-scope at the time that the closure was created. It has three scopes: it has access to its own scope, its enclosing scope and the global scope.
 
-	var globalVar = 'global';
+```javascript
+var globalVar = 'global';
 
-	function parentFunction() {
-		var _privateVar = 'private';
-		function childFunction() {
-			print(_privateVar);
-	  	}
-		return childFunction;
-	}
+function parentFunction() {
+	var _privateVar = 'private';
+	function childFunction() {
+		print(_privateVar);
+  	}
+	return childFunction;
+}
 
-	var child = parentFunction();
-	child();
+var child = parentFunction();
+child();
+```
 
 'child();' calls the function 'parentFunction'.
 'parentFunction' returns its internal function 'childFunction'. Even though 'parentFunction' has finished executing at this point, the local scope where _privateVar has the value 'private' still exists and the childFunction still uses it.
@@ -91,9 +97,11 @@ A closure is a special kind of object that combines two things: a function, and 
 
 An anonymous self-executing function is an immediately invoked function expression (IIFE). Many words to say that something look like this:
 
-	(function(){
-		// ...
-	})();
+```javascript
+(function(){
+	// ...
+})();
+```
 
 Take note of the parentheses around the entire function and the extra (); at the end of the function.
 
@@ -106,9 +114,11 @@ JavaScript has a feature known as implied globals. Whenever a name is used, the 
 
 Anonymous functions provide an easy alternative. By passing globals as parameters to our anonymous function, we import them into our code, which is both clearer and faster than implied globals. Here’s an example:
 
-	(function ($) {
-		// you now have access to the global jQuery (as $)
-	}(jQuery));
+```javascript
+(function ($) {
+	// you now have access to the global jQuery (as $)
+}(jQuery));
+```
 
 A major advantage of this solution is that we can write code that is truely modular. Even though jQuery exists in the global namespace we can make sure that it is only applied where we find it necessary.
 
@@ -116,45 +126,47 @@ A major advantage of this solution is that we can write code that is truely modu
 ## Global export
 
 You can declare your name in the global namespace by simple naming your anonymous function. 'return Module' returns the object 'var Module = {};'. To this empty object methods and variables are added to be exposed publicly. An example of this is 'Module.publicMethod'. This function is able to call the private function and return the result. Everything else is still protected using the closure of the anonymous function. Please also note the underscores in front of '_privateVar' and '_privateMethod'. It is a naming convention that private variables and functions are proceeded by an underscore. Normally variables & functions start with a lowercase letter but with modules, that is not the case. The general tradition is to start them with a capital letter instead.
+
+```javascript	
+// Global module
+var globalModule = (function (){
 	
-	// Global module
-	var globalModule = (function (){
-		
-		// Module object
-		var Module = {};
-		var _privateVar = 'private';
+	// Module object
+	var Module = {};
+	var _privateVar = 'private';
 
-		function _privateMethod() {
-			// ...
-		}
+	function _privateMethod() {
+		// ...
+	}
 
-		Module.publicProperty = 'public';
-		Module.publicMethod = function () {
-			console.log(_privateVar);
-		};
+	Module.publicProperty = 'public';
+	Module.publicMethod = function () {
+		console.log(_privateVar);
+	};
 
-		return Module;
-	})();
-
+	return Module;
+})();
+```
 
 ## Object literals
 
 In object literal notation, an object is described as a set of comma-separated name/value pairs enclosed in curly braces 'var ... = { ... };'. Names inside the object may be either strings or identifiers that are followed by a colon. Object literals encapsulate data to minimize the use of global variables. Property values can be of any data type, including array literals, functions, and nested object literals.
 
-	var myObject = {
-		string: 'string',
-		number: 2,
-		boolean: false,
-		array: ["item-0", "item-1", "item-2"],
-		nested: {
-			x: 100,
-			y: 200
-		},
-		function: function() {
-			// ...
-		}
-	};
-
+```javascript
+var myObject = {
+	string: 'string',
+	number: 2,
+	boolean: false,
+	array: ["item-0", "item-1", "item-2"],
+	nested: {
+		x: 100,
+		y: 200
+	},
+	function: function() {
+		// ...
+	}
+};
+```
 
 ## The Module Pattern continued
 
@@ -162,32 +174,36 @@ Now that we've acquired the basic knowledge I will expand further on the Module 
 
 To start a module pattern it is highly recommended to define a name in the global namespace to which you can attach the different modules.
 
-	var App = App || {};
+```javascript
+var App = App || {};
+```
 
 the Module Pattern has the following structure:
 
-	var App = App || {};
+```javascript
+var App = App || {};
 
-	// the Module Pattern
-	App.ModulePattern = (function(){
-	  
-	    // Private vars and functions
-	    var _greeting = "Hello";
-	    var _getGreeting = function(){
-	        return _greeting;
-	    };
+// the Module Pattern
+App.ModulePattern = (function(){
+  
+    // Private vars and functions
+    var _greeting = "Hello";
+    var _getGreeting = function(){
+        return _greeting;
+    };
 
-	    // Public vars and functions
-	    return {
-	        greetSomeone: function(name){
-	          console.log(_getGreeting() + ", " + name + "!");
-	        }
-	    };
-	})();
+    // Public vars and functions
+    return {
+        greetSomeone: function(name){
+          console.log(_getGreeting() + ", " + name + "!");
+        }
+    };
+})();
 
-	App.ModulePattern.greetSomeone("World");
+App.ModulePattern.greetSomeone("World");
 
-	//console logs 'Hello World!'
+//console logs 'Hello World!'
+```
 
 You attach the 'ModulePattern' module to the global name 'App' to expose the return values to the public. Anything outside of the return statement is by default private. You access the module from the outside using 'App.ModulePattern.greetSomeone("World");'. The public function 'greetSomeone' has access to the private function '_getGreeting'. You are not able to access '_getGreeting' directly from the outside.
 
@@ -210,36 +226,40 @@ You attach the 'ModulePattern' module to the global name 'App' to expose the ret
 
 The Revealing Module Pattern has the following structure:
 
-	var App = App || {};
+```javascript
+var App = App || {};
 
-	// the Revealing Module Pattern
-	App.RevealingModulePattern = (function() {
-	    
-	    // Private vars and functions
-	    var _greeting = "Hello";
-	    var _getGreeting = function(){
-	        return _greeting;
-	    };
+// the Revealing Module Pattern
+App.RevealingModulePattern = (function() {
+    
+    // Private vars and functions
+    var _greeting = "Hello";
+    var _getGreeting = function(){
+        return _greeting;
+    };
 
-	    var greetSomeone = function(name){
-	        console.log(_getGreeting() + ", " + name + "!");
-	    };
+    var greetSomeone = function(name){
+        console.log(_getGreeting() + ", " + name + "!");
+    };
 
-	    // Public vars and functions
-	    return {
-	        greetSomeone : greetSomeone
-	    };
-	})();
+    // Public vars and functions
+    return {
+        greetSomeone : greetSomeone
+    };
+})();
 
-	App.RevealingModulePattern.greetSomeone("World");
+App.RevealingModulePattern.greetSomeone("World");
 
-	//console logs 'Hello World!'
+//console logs 'Hello World!'
+```
 
 In the same way as before you attach the 'RevealingModulePattern' module to the global name 'App' to be able to reveal the module to the outside world in an API-like fashion. The main difference between the Revealing Module Pattern and the Module Pattern is the way it references in the return statement. The pattern was engineered as a way to ensure that all methods and variables are kept private until they are explicitly exposed; usually through an object literal returned by the closure from which it's defined.
 
-	var greetSomeone = function(name){
-	    console.log(_getGreeting() + ", " + name + "!");
-	};
+```javascript
+var greetSomeone = function(name){
+    console.log(_getGreeting() + ", " + name + "!");
+};
+```
 
 Is able to be placed outside of the return statement and is referenced indirectly. It is naming convention to name both the references the same but it can be a bit confusing at first.
 	
