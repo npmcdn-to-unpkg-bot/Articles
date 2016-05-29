@@ -1,8 +1,6 @@
 ## Object Oriented Programming in Javascript (ES5 & ES6)
 
 A comparison between OOP Javascript in ES5 and the improvements in ES6.
-
-
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
@@ -57,3 +55,5 @@ JavaScript is a class-less language, however classes can be simulated using func
 	myCar.year = "2010";
 	 
 	console.log( myCar.getInfo() );
+
+https://carldanley.com/js-revealing-module-pattern/
