@@ -242,7 +242,8 @@ In the same way as before you attach the 'RevealingModulePattern' module to the 
 	};
 
 Is able to be placed outside of the return statement and is referenced indirectly. It is naming convention to name both the references the same but it can be a bit confusing at first.
-
+	
+	```javascript
  	// Public vars and functions
  	return {
  	    foo : greetSomeone
@@ -250,7 +251,7 @@ Is able to be placed outside of the return statement and is referenced indirectl
 
 	'App.RevealingModulePattern.foo("World");' // returns 'Hello World!'
 	'App.RevealingModulePattern.greetSomeone("World");' returns 'undefined'
-
+	```
 
 ### Advantages
 
@@ -278,6 +279,7 @@ I would like to thank Addy Osmani for writing the great book ['Learning JavaScri
 Another great article to read is ['Javascript Module In Depth'](http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html) by Ben Cherry especially the parts on global imports and exports.
 
 Final thanks goes out to Carl Danley and his two articles ['The Module Pattern'](https://carldanley.com/js-module-pattern/) and ['The Revealing Module Pattern'](https://carldanley.com/js-revealing-module-pattern/). He gives a great overview of the two patterns and provides a learning source for many more. 
+
 
 
 
