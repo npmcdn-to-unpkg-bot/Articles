@@ -89,8 +89,8 @@ var child = parentFunction();
 child();
 ```
 
-'child();' calls the function 'parentFunction'.
-'parentFunction' returns its internal function 'childFunction'. Even though 'parentFunction' has finished executing at this point, the local scope where _privateVar has the value 'private' still exists and the childFunction still uses it.
+`child();` calls the function `parentFunction`.
+`parentFunction` returns its internal function `childFunction`. Even though `parentFunction` has finished executing at this point, the local scope where `_privateVar` has the value `private` still exists and the `childFunction` still uses it.
 
 
 ## Anonymous self-executing functions
@@ -103,7 +103,7 @@ An anonymous self-executing function is an immediately invoked function expressi
 })();
 ```
 
-Take note of the parentheses around the entire function and the extra (); at the end of the function.
+Take note of the parentheses around the entire function and the extra `();` at the end of the function.
 
 Those two parentheses enable everything contained to be executed immediately. Because of lexical scoping all variables and functions defined within the anonymous function aren’t available to the code outside of it, effectively using a closure to seal itself from other libraries and code. An IIFE can have a return value just like any other function. This means that we can choose what we would like to expose to the public. 
 
@@ -125,7 +125,7 @@ A major advantage of this solution is that we can write code that is truely modu
 
 ## Global export
 
-You can declare your name in the global namespace by simple naming your anonymous function. 'return Module' returns the object 'var Module = {};'. To this empty object methods and variables are added to be exposed publicly. An example of this is 'Module.publicMethod'. This function is able to call the private function and return the result. Everything else is still protected using the closure of the anonymous function. Please also note the underscores in front of '_privateVar' and '_privateMethod'. It is a naming convention that private variables and functions are proceeded by an underscore. Normally variables & functions start with a lowercase letter but with modules, that is not the case. The general tradition is to start them with a capital letter instead.
+You can declare your name in the global namespace by simple naming your anonymous function. `return Module` returns the object `var Module = {};`. To this empty object methods and variables are added to be exposed publicly. An example of this is `Module.publicMethod`. This function is able to call the private function and return the result. Everything else is still protected using the closure of the anonymous function. Please also note the underscores in front of `_privateVar` and `_privateMethod`. It is a naming convention that private variables and functions are proceeded by an underscore. Normally variables & functions start with a lowercase letter but with modules, that is not the case. The general tradition is to start them with a capital letter instead.
 
 ```javascript	
 // Global module
@@ -150,7 +150,7 @@ var globalModule = (function (){
 
 ## Object literals
 
-In object literal notation, an object is described as a set of comma-separated name/value pairs enclosed in curly braces 'var ... = { ... };'. Names inside the object may be either strings or identifiers that are followed by a colon. Object literals encapsulate data to minimize the use of global variables. Property values can be of any data type, including array literals, functions, and nested object literals.
+In object literal notation, an object is described as a set of comma-separated name/value pairs enclosed in curly braces `var ... = { ... };`. Names inside the object may be either strings or identifiers that are followed by a colon. Object literals encapsulate data to minimize the use of global variables. Property values can be of any data type, including array literals, functions, and nested object literals.
 
 ```javascript
 var myObject = {
@@ -205,15 +205,15 @@ App.ModulePattern.greetSomeone("World");
 //console logs 'Hello World!'
 ```
 
-You attach the 'ModulePattern' module to the global name 'App' to expose the return values to the public. Anything outside of the return statement is by default private. You access the module from the outside using 'App.ModulePattern.greetSomeone("World");'. The public function 'greetSomeone' has access to the private function '_getGreeting'. You are not able to access '_getGreeting' directly from the outside.
+You attach the `ModulePattern` module to the global name `App` to expose the return values to the public. Anything outside of the return statement is by default private. You access the module from the outside using `App.ModulePattern.greetSomeone("World");`. The public function `greetSomeone` has access to the private function `_getGreeting`. You are not able to access `_getGreeting` directly from the outside.
 
 
 ### Advantages
 
 	- the Module Pattern fully supports encapsulation.
-	- Clean approach for developers
-	- Less clutter in the global namespace
-	- Localization of functions and variables through closures
+	- Clean approach for developers.
+	- Less clutter in the global namespace.
+	- Localization of functions and variables through closures.
 
 ### Disadvantages
 
@@ -253,7 +253,7 @@ App.RevealingModulePattern.greetSomeone("World");
 //console logs 'Hello World!'
 ```
 
-In the same way as before you attach the 'RevealingModulePattern' module to the global name 'App' to be able to reveal the module to the outside world in an API-like fashion. The main difference between the Revealing Module Pattern and the Module Pattern is the way it references in the return statement. The pattern was engineered as a way to ensure that all methods and variables are kept private until they are explicitly exposed; usually through an object literal returned by the closure from which it's defined.
+In the same way as before you attach the `RevealingModulePattern` module to the global name `App` to be able to reveal the module to the outside world in an API-like fashion. The main difference between the Revealing Module Pattern and the Module Pattern is the way it references in the return statement. The pattern was engineered as a way to ensure that all methods and variables are kept private until they are explicitly exposed; usually through an object literal returned by the closure from which it's defined.
 
 ```javascript
 var greetSomeone = function(name){
@@ -275,12 +275,12 @@ return {
 
 ### Advantages
 
-    - Cleaner approach for developers
-    - Supports private data
-    - Less clutter in the global namespace
-    - Localization of functions and variables through closures
-    - The syntax of our scripts are even more consistent
-    - Explicitly defined public methods and variables which lead to increased readability
+    - Cleaner approach for developers.
+    - Supports private data.
+    - Less clutter in the global namespace.
+    - Localization of functions and variables through closures.
+    - The syntax of our scripts are even more consistent.
+    - Explicitly defined public methods and variables which lead to increased readability.
 
 
 ### Disadvantages
