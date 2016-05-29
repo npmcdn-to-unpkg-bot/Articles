@@ -1,23 +1,20 @@
 ## Design Patterns
 
-Design patterns are reusable solutions to commonly occuring problems in software design. They help us structure our code in an optimized way whilst meeting the needs of problems we are attempting to solve. Other programmers can easily read and maintain code writting using commonly used design patterns. They provide us a common vocabulary to describe solutions opposed to describing syntax and semantics (thanks Wikipedia).
-
+Design patterns are reusable structures and ways of thinking to solve commonly occuring problems in software design.
 A great advantage of using a design pattern to structure your code is that most patterns provide an out-of-the-box solution. Being out-of-the-box enables other programmers to easily step in, fix bugs or expand the existing codebase. Once a programmer is familiar with a popular design pattern such as the Module Pattern and becomes used to writing modular JavaScript, one can contribute to the development of libraries such as jQuery, Node and other open source projects. 
 
-Patterns are not exact solutions to your problem; you still have to write your code. It rather provides a mental 'framework' or a solution scheme. If the programmers working on an application are able to think in the same way of structuring the code they are able to worry less about the structure and rather focus on the actual quality of the solution.
-
-`tl;dr design patterns are even hotter than your mixtape` 
+Patterns are not exact solutions to your problem; you still have to write your code. It rather provides a mental 'framework' or a solution scheme. If the programmers working on an application are able to think in the same way of structuring the code they are able to worry less about the structure and rather focus on the actual quality and optimization of the solution.
 
 Now that we have gotton this general introduction out of the way I would like to introduce a commonly used JavaScript design pattern: the Module Pattern. 
 
 
 ## The Module Pattern
 
-The Module Pattern was popularized by Eric Miraglia in a blogpost back in 2007. He introduces us to the work of Douglas Crockford. His Module Pattern focusses on a couple of key principles in OOP (Object Oriented Programming). It is used to mimic classes in conventional software engineering and focuses on encapsulation of methods and variables. The pattern strives to improve the reduction of globally scoped variables.  
+The Module Pattern was popularized by Eric Miraglia in a [blogpost](http://yuiblog.com/blog/2007/06/12/module-pattern/) back in 2007. He introduces us to the [work](http://javascript.crockford.com/private.html) of Douglas Crockford. His Module Pattern focuses on a couple of key principles in OOP (Object Oriented Programming). It is used to mimic classes in conventional software engineering and focuses on encapsulation of methods and variables. The pattern strives to improve the reduction of globally scoped variables and global namespace pollution.  
 
 It enables programmers to write private methods and variables in anonymous functions prior to a return statement. Anything that is returned is regarded as public. This enables us to write API like strucutures in which programmers can interact with a piece of code in a limited way. 
 
-To do all this funky stuff the Module Pattern relies on a couple of really sweet features in JavaScript. To understand it I will go back to the basics and gradually build it up. If you are already comfortable with specific topics feel free to skip chapters. In the end I will expand further on the Module Pattern and the Revealing Module Pattern.
+To do all this funky stuff the Module Pattern relies on a couple of really sweet features in JavaScript. To understand how it works I will go back to the basics and gradually build it up to show you how. If you are already comfortable with specific topics feel free to skip chapters. In the end I will expand further on the Module Pattern and the Revealing Module Pattern.
 
 
 ## Classes in JavaScript
@@ -51,10 +48,9 @@ var parent = function () {
 };
 ```
 
-Note that this only works in one direction on the scope chain. A variable defined on the child level is not available to the parent level. `_childVar` is not available to the scope of the parent or to the global scope. However `_parentVar` is available to the scope of the child! It only works in one direction!
+A variable defined on the child level is not available to the parent level. `_childVar` is not available to the scope of the parent or to the global scope. However `_parentVar` is available to the scope of the child but not available to the global scope. Note that this only works whilst going down the scope chain, not up. 
 
 ```javascript
-
 var parent = function () {
 	var _parentVar = 'private'
 
@@ -72,7 +68,7 @@ var parent = function () {
 
 So how does this work?
 
-Nested functions have access to variables declared in their outer scope. In other words: the scope of an inner function contains the scope of a parent function. The functions defined within another function won't be accessible outside the function unless they have been attached to an object that is accessible outside the function. This relationship between inner function and outer function we call static/lexical scoping. The scope of variables is defined by their position in source code. 
+Nested functions have access to variables declared in their outer scope. In other words: the scope of an inner function contains the scope of a parent function. The functions defined within another function won't be accessible outside the function unless they have been attached to an object that is accessible outside the function. This relationship between inner function and outer function we call Lexical scoping. The scope of variables is defined by their position in source code. 
 
 
 ## Closures in JavaScript
@@ -217,7 +213,7 @@ You attach the `ModulePattern` module to the global name `App` to expose the ret
 
 ### Advantages
 
-	- the Module Pattern fully supports encapsulation.
+	- The Module Pattern fully supports encapsulation.
 	- Clean approach for developers.
 	- Less clutter in the global namespace.
 	- Localization of functions and variables through closures.
@@ -226,7 +222,6 @@ You attach the `ModulePattern` module to the global name `App` to expose the ret
 
 	- Private methods are unaccessible and lose extendability.
 	- Public and private members are treated differently and are bound to their place in the source code.
-	- Some users experience issues with unit testing though given the adaptation of the Module Pattern by jQuery and their everyday use of QUnit to automate testing. 
 
 
 ## The Revealing Module Pattern
@@ -282,24 +277,23 @@ return {
 
 ### Advantages
 
-    - Cleaner approach for developers.
-    - Supports private data.
-    - Less clutter in the global namespace.
-    - Localization of functions and variables through closures.
-    - The syntax of our scripts are even more consistent.
-    - Explicitly defined public methods and variables which lead to increased readability.
+	- The Module Pattern fully supports encapsulation.
+	- Clean approach for developers.
+	- Less clutter in the global namespace.
+	- Localization of functions and variables through closures.
+    - The syntax of our code is even more consistent.
+    - Public methods and variables are explicitly defined which lead to increased readability.
 
 
 ### Disadvantages
 
 	- Private methods are unaccessible and lose extendability.
 	- It's harder to patch public methods and variables that are referred to by something private.
-	- Some users experience issues with unit testing though given the adaptation of the Module Pattern by jQuery and their everyday use of QUnit to automate testing.
 
 
 ## Conclusion
 
-I hope you all enjoyed my introduction to design patterns, the Module Pattern and the Revealing Module Pattern. My goal was to give a general overview and build up knowledge step by step to understand the patterns myself and help you along the way. 
+I hope you all enjoyed my introduction to design patterns, the Module Pattern and the Revealing Module Pattern. My goal was to give a general overview and build up knowledge step by step to understand the patterns myself and help you along the way.
 
 I would like to thank Addy Osmani for writing the great book ['Learning JavaScript Design Patterns'](https://addyosmani.com/resources/essentialjsdesignpatterns/book/index.html) which I highly recommend reading.
 
