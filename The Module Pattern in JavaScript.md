@@ -1,10 +1,12 @@
 ## Design Patterns
 
-Design patterns are reusable solutions to commonly occuring problems in software design. They help us structure our code in an optimized way whilst meeting the needs of problems we are attempting to solve. Other programmers can easily read and maintain code writting using commonly used design patterns. They provide us a common vocabulary to describe solutions opposed to describing syntax and semantics.
+Design patterns are reusable solutions to commonly occuring problems in software design. They help us structure our code in an optimized way whilst meeting the needs of problems we are attempting to solve. Other programmers can easily read and maintain code writting using commonly used design patterns. They provide us a common vocabulary to describe solutions opposed to describing syntax and semantics (thanks Wikipedia).
 
-A great advantage of using a design pattern to structure your code is that most patterns provide an out-of-the-box solution. Being out-of-the-box enables other programmers to easily step in, fix bugs or expand the existing codebase. Once a programmer is familiar with a popular design pattern such as the Module Pattern, used to write modular JavaScript, one can contribute to the development of libraries such as JQuery and other open source projects. 
+A great advantage of using a design pattern to structure your code is that most patterns provide an out-of-the-box solution. Being out-of-the-box enables other programmers to easily step in, fix bugs or expand the existing codebase. Once a programmer is familiar with a popular design pattern such as the Module Pattern and becomes used to writing modular JavaScript, one can contribute to the development of libraries such as jQuery, Node and other open source projects. 
 
-Patterns are not exact solutions to your problem; you still have to write your code. It provides a mental 'framework' or a solution scheme. If the programmers working on an application are able to think in the same way of structuring the code they are able to worry less about the structure and rather focus on the actual quality of the solution. 
+Patterns are not exact solutions to your problem; you still have to write your code. It rather provides a mental 'framework' or a solution scheme. If the programmers working on an application are able to think in the same way of structuring the code they are able to worry less about the structure and rather focus on the actual quality of the solution.
+
+`tl;dr design patterns are even hotter than your mixtape` 
 
 Now that we have gotton this general introduction out of the way I would like to introduce a commonly used JavaScript design pattern: the Module Pattern. 
 
@@ -304,8 +306,6 @@ I would like to thank Addy Osmani for writing the great book ['Learning JavaScri
 Another great article to read is ['Javascript Module In Depth'](http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html) by Ben Cherry especially the parts on global imports and exports.
 
 Final thanks goes out to Carl Danley and his two articles ['The Module Pattern'](https://carldanley.com/js-module-pattern/) and ['The Revealing Module Pattern'](https://carldanley.com/js-revealing-module-pattern/). He gives a great overview of the two patterns and provides a learning source for many more. 
-
-
 
 
 
