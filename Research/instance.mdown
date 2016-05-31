@@ -1,0 +1,49 @@
+Instance
+	
+	An instance is an implemtation of a function. It is denoted by the keyword 'new' in front of the function name followed by a '(...);'. 
+
+In the following example, `rabbit` is an object that was created from the constructor function Animal. The `rabbit` object is an instance of the `Animal` object. The `rabbit` object inherits properties and methods from the Animal object. Additionally the `rabbit` object can have its own properties and methods. These properties are not available to the object `Animal` as `rabbit` is a subset of `Animal` and not the other way around.
+
+```javascript
+function Animal (species) {
+	// ...
+}
+
+var rabbit = new Animal ('rabbit');
+```
+
+To make use of the most important implementations of OOP in JavaScript I'll be combining two commonly used patterns to establish a programmer friendly one that implements both inheritance and encapsulation.
+
+function Animal (name, height, weight) {
+	this.name = name;
+	this.height = height;
+	this.weight = weight;
+}
+
+Animal.prototype = {
+	constructor: Animal,
+	changeName: function (newName) {
+		this.name = newName;
+		console.log("Name changed into: " this.name');
+	},
+	changeHeight: function (newHeight) {
+		this.height = newHeight;
+		console.log("Height changed into: " this.height);
+	},
+	changeWeight: function (newWeight) {
+		this.weight = newWeight;
+		console.log("Weight changed into: " this.weight);
+	}
+}
+
+rabbit = new User ("Rabbit", "15", "800");
+console.log(rabbit);
+
+rabbit.changeHeight()
+
+In JavaScript, you add methods and properties on the prototype property when you want instances of an object to inherit those methods and properties. This is the reason we add the methods on the User.prototype property, so that they can be used by all instances of the User object.
+
+
+
+
+

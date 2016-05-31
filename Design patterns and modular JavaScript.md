@@ -17,60 +17,6 @@ It enables programmers to write private methods and variables in anonymous funct
 To do all this funky stuff the Module Pattern relies on a couple of really sweet features in JavaScript. To understand how it works I will go back to the basics and gradually build it up to show you how. If you are already comfortable with specific topics feel free to skip chapters. In the end I will expand further on the Module Pattern and the Revealing Module Pattern.
 
 
-## Classes in JavaScript
-
-An important thing to note immediatly is that JavaScript is a class-less language, however classes can be simulated using functions. If you would like to learn more about OOP (Objective Oriented Programming) in JavaScript please read my [article](https://github.com/TimvanScherpenzeel/Articles/) on it here.
-
-
-## Scope in JavaScript
-
-A scope is the lifespan of a variable. Like humans every variable is born, lives and dies. The beginning of a scope marks the time the variable is born and the end of the scope marks the time it dies. In other words: A scope is the current context of execution. In this context variables and expressions are 'visible'. If a variable is not in the current scope then it is unavaible to use and will return as undefined.
-
-Global variables are alive as soon as the program starts and die when the program ends. They are called global because once they are alive they can be accessed by any function inside and outside of the context. In most cases you want to limit the amount of global variables and global methods as this raises security concerns and clogs up the global namespace. But how do we do that? How do we prevent JavaScript from exposing our variables, methods and functions as it does by default?
-
-In JavaScript a variable or method defined inside of a function are not accessable from outside of that function. 'Local' or 'private' variables (variables inside functions) are only alive as long as the function is being executed. Variables inside of the global scope are called 'public' and remain alive for as long the program is being executed.
-
-In the following piece of code I show the workings of a global variable. Do you see that it is visible anywhere in the program? As Chief Keef would say: "that's that shit I don't like".
-
-```javascript
-var globalVar = 'global'; // global variable
-
-var parent = function () {
-	var _privateVar = 'private';
-
-	console.log(globalVar); // globalVar is defined
-	console.log(_privateVar); // privateVar is defined
-
-	var child = function () {
-		console.log(globalVar); // globalVar is defined
-		console.log(_privateVar); // privateVar is defined
-	};
-};
-```
-
-A variable defined on the child level is not available to the parent level. `_childVar` is not available to the scope of the parent or to the global scope. However `_parentVar` is available to the scope of the child but not available to the global scope. Note that this only works whilst going down the scope chain, not up. 
-
-```javascript
-var parent = function () {
-	var _parentVar = 'private'
-
-	console.log(_parentVar); // _parentVar is defined
-	console.log(_privateVar); // _childVar is undefined
-
-	var child = function () {
-		var _childVar = 'private';
-
-		console.log(_parentVar); // _parentVar is defined
-		console.log(_childVar); // _childVar is defined
-	};
-};
-```
-
-So how does this work?
-
-Nested functions have access to variables declared in their outer scope. In other words: the scope of an inner function contains the scope of a parent function. The functions defined within another function won't be accessible outside the function unless they have been attached to an object that is accessible outside the function. This relationship between inner function and outer function we call Lexical scoping. The scope of variables is defined by their position in source code. 
-
-
 ## Closures in JavaScript
 
 A closure is a subset of the lexical scope. Accessing a variable outside of the immediate scope creates a closure. 
@@ -128,7 +74,7 @@ A major advantage of this solution is that we can write code that is truely modu
 
 ## Global export
 
-You can declare your name in the global namespace by simple naming your anonymous function. `return Module` returns the object `var Module = {};`. To this empty object methods and variables are added to be exposed publicly. An example of this is `Module.publicMethod`. This function is able to call the private function and return the result. Everything else is still protected using the closure of the anonymous function. Please also note the underscores in front of `_privateVar` and `_privateMethod`. It is a naming convention that private variables and functions are proceeded by an underscore. Usually variables and functions start with a lowercase letter but with modules, that is not the case. The general tradition is to start them with a capital letter instead.
+You can define your name in the global namespace by simple naming your anonymous function. `return Module` returns the object `var Module = {};`. To this empty object methods and variables are added to be exposed publicly. An example of this is `Module.publicMethod`. This function is able to call the private function and return the result. Everything else is still protected using the closure of the anonymous function. Please also note the underscores in front of `_privateVar` and `_privateMethod`. It is a naming convention that private variables and functions are proceeded by an underscore. Usually variables and functions start with a lowercase letter but with modules, that is not the case. The general tradition is to start them with a capital letter instead.
 
 ```javascript	
 // Global module
