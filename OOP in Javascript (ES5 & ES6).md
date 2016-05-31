@@ -108,40 +108,5 @@ Encapsulation is the inclusion within a program object of all the resources need
 
 ## Conclusion
 
-Now that we have a general overview of what OOP is and what it can do for us I would highly recommend reading my other article ['Design patterns and modular JavaScript'](https://www.github.com/timvanscherpenzeel/Articles) in which I introduce you to better ways of actually implementing OOP in JavaScript. 
-
-
-## Object literal notation vs. constructor object notation
-
-In JavaScript objects can be thought of as the main buidling blocks: every component is an object including functions and variables. We commonly use object literal notation or constructor object notation to create object.
-
-Example of an object created in 'object literal notation':
-
-```javascript
-var myObject(){
-	name : 'object literal notation',
-	type : function() {
-		console.log('Written using' + this.name);
-	}
-};
-
-myObject.type();
-```
-
-Example of an object created as a 'constructor object notation':
-
-```javascript
-function myObject(){
-	this.name = 'constructor object notation';
-	this.type = function() {
-		console.log('Written using' + this.name);
-	};
-};
-
-var instanceOfMyObject = new myObject();
-instanceOfMyObject.type();
-```
-
-You can see the advantage of the object literal notation straight away: you don't have to deal with the confusing `this` or worry about binding it, you don't need  To call a a literally notated object, you reference its variable name. To call a constructor object you first has to instantiate it using the `new` notation. With the object literal notation you are changing the actual object itself rather than an instance of the object, as you do with the constructor object notation.   
-A clear downside is that you are effectively building a long list seperated by comma's. Missing one breaks the entire chain.
+Now that we have a general overview of what OOP is and what it can do for us I would highly recommend reading my other article ['Design patterns and modular JavaScript'](https://www.github.com/timvanscherpenzeel/Articles) in which I introduce you to better ways of actually implementing OOP in JavaScript.
 
