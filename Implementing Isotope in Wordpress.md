@@ -1,6 +1,6 @@
 ## Implementing Isotope in Wordpress
 
-In this article I'll show you how I've implement the JavaScript library [Isotope](http://isotope.metafizzy.co/#getting-started) in a simple Wordpress theme I have developed. I use the library to filter recipes based on categories like breakfast, lunch and dinner. I use a custom post type and featured images to create a filterable image gallery. I construct a dynamic filter menu based on what categories exist. Granted, it is not the most beautiful code ever written but it works.
+In this article I'll show you how I've implement the JavaScript library [Isotope](http://isotope.metafizzy.co/#getting-started) in a simple Wordpress theme I have developed. I use the library to filter recipes based on categories like breakfast, lunch and dinner. I use a custom post type and featured images to create a filterable image gallery. I construct a dynamic filter menu based on what categories exist. Granted, it is not the most beautiful code ever written but it works. You can download the entire theme including the code I'll discuss below [here](https://www.github.com/timvanscherpenzeel/sjef).
 
 ## Importing Isoptope
 
@@ -91,7 +91,9 @@ add_action( 'init', 'sjef_custom_posttype', 0 );
 ?>
 ```
 
-Now that we have registered a custom post type we should start using it! Go try it out. I registered all my recipe posts with the keyword 'Type'. You can add give a post multiple tags by seperating the identifiers with a comma. Make sure you also set a featured image with every post otherwise it won't show up.
+Now that we have registered a custom post type we should start using it! Go try it out. I registered all my recipe posts with the keyword 'Type'. You can add give a post multiple tags by seperating the identifiers with a comma. Make sure you also set a featured image with every post otherwise it won't show up. 
+
+You should also add imagesupport to `functions.php` through following snippet `add_image_size('small-thumbnail', 400);`.
 
 
 ## Filter menu
@@ -168,7 +170,7 @@ In `index.php` can copy the following code to create the filter menu. When you c
 
 ## Filterable imagegrid
 
-At last we will construct the filterable imagegrid. The images have a specific size to work nicely with css. To enable this head to `functions.php` and add the following snippet `add_image_size('small-thumbnail', 400);`.
+Next we will construct the filterable imagegrid. The images have a specific size to work nicely with css.
 
 ```php
 <div class="recipeContainer">
@@ -203,4 +205,36 @@ At last we will construct the filterable imagegrid. The images have a specific s
 	?>
 
 </div>
+```
+
+You should add the following code to your main JavaScript file for it all to work.
+
+```js
+$(window).load(function(){
+    var $container = $('.recipeContainer');
+    $container.isotope({
+        filter: '*',
+        animationOptions: {
+            duration: 350,
+            easing: 'linear',
+            queue: false
+        }
+    });
+ 
+    $('.recipeFilter a').click(function(){
+        $('.recipeFilter .current').removeClass('current');
+        $(this).addClass('current');
+ 
+        var selector = $(this).attr('data-filter');
+        $container.isotope({
+            filter: selector,
+            animationOptions: {
+                duration: 350,
+                easing: 'linear',
+                queue: false
+            }
+         });
+         return false;
+    }); 
+});
 ```
