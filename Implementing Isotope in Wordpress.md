@@ -91,10 +91,25 @@ add_action( 'init', 'sjef_custom_posttype', 0 );
 ?>
 ```
 
-Now that we have registered a custom post type we should start using it! Go try it out. I registered all my recipe posts with the keyword 'Type'. You can add give a post multiple tags by seperating the identifiers with a comma. Make sure you also set a featured image with every post otherwise it won't show up. 
+Now that we have registered a custom post type we should start using it! Go try it out. I registered all my recipe posts with the keyword 'Type'. You can add multiple tags to a post by seperating the identifiers with a comma. Make sure you also set a featured image with every post otherwise it won't show up. 
 
-You should also add imagesupport to `functions.php` through following snippet `add_image_size('small-thumbnail', 400);`.
+You should also add image- and menu support to `functions.php` like this:
 
+```php
+// Theme setup
+function sjef_setup() {
+
+	register_nav_menus(array(
+		'primary' => __( 'Primary Menu'),
+	));
+
+	add_image_size('small-thumbnail', 400);
+}
+
+add_action('after_setup_theme', 'sjef_setup');
+
+?>
+```
 
 ## Filter menu
 
