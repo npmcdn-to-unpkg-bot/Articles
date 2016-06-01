@@ -1,4 +1,4 @@
-## Object Oriented Programming in Javascript (ES5 & ES6)
+## Object Oriented Programming in Javascript
 
 Objective Oriented Programming (OOP) is a design philosophy that uses abstraction to create models based on the real world. Everything in OOP is grouped as self sustainable 'objects'; It is a collection of coorperating objects rather than a list of commands or an instructured collection of functions.
 
