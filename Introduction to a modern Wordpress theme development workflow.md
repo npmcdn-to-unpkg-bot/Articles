@@ -1,6 +1,6 @@
 ## Introduction to a modern Wordpress theme development workflow
 
-[Wordpress](https://www.wordpress.org/about) is an open source content management system (CMS) that runs on PHP and MySQL. If you are more into Node I would highly recommend having a look at [Ghost](https://github.com/TryGhost/Ghost). Please note that I'll be treating you as a developer not a casual user that is only looking to modify a theme. 
+[Wordpress](https://www.wordpress.org/about) is an open source content management system (CMS) that runs on PHP and MySQL. If you are more into Node I would highly recommend having a look at [Ghost](https://github.com/TryGhost/Ghost).
 
 ## Installing Wordpress
 
@@ -36,6 +36,4 @@ Now that we have the enviroment we have to install [Variable VVV](https://github
 
 	$ vagrant up
 
-Now just head to `projectname.dev/wp-admin`. You can log in using `admin` and `password`. Make sure to change them before deploying. Make sure to have a look at the documentation of VVV and Variable VVV.
-
-
+Now just `cd` into `projectname.dev/wp-admin`. You can log in using `admin` and `password`. Make sure to change them before deploying. Make sure to have a look at the documentation of VVV and Variable VVV.

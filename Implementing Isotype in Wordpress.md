@@ -1,2 +1,0 @@
-## Implementing Isotype in Wordpress
-
