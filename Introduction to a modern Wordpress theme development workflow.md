@@ -4,7 +4,7 @@
 
 ## Installing Wordpress
 
-To start you off with Wordpress I would like to introduce you first to the modern Wordpress workflow. Much of the stuff you find online is either outdated or has better alternatives. We will be using a virtual machine (VirtualBox), a development environment focused on Wordpress (VVV) and a site creation tool (VV). This may seem like a ton of work to set up but if you are planning to work with Wordpress on a regular basis I highly recommend the workflow I am going to describe in a bit.  For this tutorial I am going to assume you use OSX and Homebrew.
+To start you off with Wordpress I would like to introduce you first to the modern Wordpress workflow. Much of the stuff you find online is either outdated or has better alternatives. We will be using a virtual machine (VirtualBox), a development environment focused on Wordpress (VVV) and a site creation tool (VV). This may seem like a ton of work to set up but if you are planning to work with Wordpress on a regular basis I highly recommend the workflow I am going to describe. For this tutorial I am going to assume you use OSX and Homebrew.
 
 ## VirtualBox + Vagrant + VVV + VV
 
@@ -33,6 +33,8 @@ Now that we have the enviroment we have to install [Variable VVV](https://github
 	$ cd ~/vagrant-local
 
 	$ vv create
+	
+	$ cd projectname
 
 	$ vagrant up
 
