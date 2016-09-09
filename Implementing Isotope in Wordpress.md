@@ -4,7 +4,7 @@ In this article I'll show you how I've implement the JavaScript library [Isotope
 
 ## Importing Isoptope
 
-First of all we should import jQuery and the [Isotope library](https://npmcdn.com/isotope-layout@3.0.0/dist/isotope.pkgd.min.js). Add the following lines to `functions.php` and move the `isotope.pkgd.min.js` in your JavaScript folder.
+First of all we should import jQuery and the [Isotope library](https://unpkg.com/isotope-layout@3.0.0/dist/isotope.pkgd.min.js). Add the following lines to `functions.php` and move the `isotope.pkgd.min.js` in your JavaScript folder.
 
 	//Jquery import
 	if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
